@@ -1,0 +1,39 @@
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|top"
+    android:padding="7dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="215dp"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom|right"
+            android:text="Ok"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="215dp"
+            android:layout_height="80dp"
+            android:layout_gravity="left|bottom"
+            android:text="Cancel"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/GarageName"
+            android:layout_alignStart="@+id/GarageName" />
+
+        <EditText
+            android:id="@+id/garageName"
+            android:layout_width="580dp"
+            android:layout_height="69dp"
+            android:layout_gravity="center_horizontal|top"
+            android:text="Garage name"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/okButton"
+            android:layout_alignEnd="@+id/okButton" />
+
+    </RelativeLayout>
