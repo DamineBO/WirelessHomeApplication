@@ -1,24 +1,16 @@
-package com.benouada.damine.wirelesshomeapplication.rooms;
+package com.benouada.damine.wirelesshomeapplication;
 
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.benouada.damine.wirelesshomeapplication.R;
+public class GarageActivity extends AppCompatActivity {
 
-public class Garage extends ActionBarActivity {
-
-
-    private Toolbar toolbar;
-
-    public static String[] listRoomElementName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garage);
-
     }
 
     @Override
