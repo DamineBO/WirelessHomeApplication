@@ -24,8 +24,6 @@
             android:layout_above="@+id/textView"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true">
-
-
         </ScrollView>
 
 

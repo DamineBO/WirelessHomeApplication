@@ -31,17 +31,33 @@ public class MainActivity extends ActionBarActivity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
-        // menu
-        List<String> menu = Arrays.asList("Garage", "Kitchen", "Bedroom");
-        ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_container);
-        FloatingActionsMenu fab = new FloatingActionsMenu(this);
+        // Menu----------------------------
+        List<String> menu = Arrays.asList("Bedroom", "Kitchen", "Livingroom", "Bathroom", "WC", "Garage");
+        List icon = Arrays.asList(R.mipmap.r_bedroom, R.mipmap.r_kitchen, R.mipmap.r_livingroom, R.mipmap.r_bathroom, R.mipmap.r_wc, R.mipmap.r_garage);
 
+        FloatingActionButton b0 = new FloatingActionButton(this);
         FloatingActionButton b1 = new FloatingActionButton(this);
-        b1.setTitle(menu.get(0));
-        b1.setIcon(R.mipmap.r_garage);
-        fab.addButton(b1);
+        FloatingActionButton b2 = new FloatingActionButton(this);
+        FloatingActionButton b3 = new FloatingActionButton(this);
+        FloatingActionButton b4 = new FloatingActionButton(this);
+        FloatingActionButton b5 = new FloatingActionButton(this);
 
+        List<FloatingActionButton> button = Arrays.asList(b0, b1, b2, b3, b4, b5);
+
+        ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_container);
+        // FAB_menu-----
+        FloatingActionsMenu fab = new FloatingActionsMenu(this);
         menu_container.addView(fab);
+        // -----FAB_menu [end]
+        for (int i=0 ; i<6 ;i++) {
+        button.get(i).setTitle(menu.get(i));
+        button.get(i).setIcon((Integer) icon.get(i));
+        fab.addButton(button.get(i));
+
+
+        }
+
+        // ----------------------------Menu [end]
 
     }
 
