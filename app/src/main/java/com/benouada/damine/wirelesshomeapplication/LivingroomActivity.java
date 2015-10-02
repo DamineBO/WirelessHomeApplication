@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class GarageActivity extends AppCompatActivity {
+public class LivingroomActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_garage);
+        setContentView(R.layout.activity_livingroom);
     }
 
     @Override

@@ -1,16 +1,24 @@
 package com.benouada.damine.wirelesshomeapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
     static FloatingActionButton btnGarage;
+
 
     //    private MenuDrawer mDrawer;
     private Toolbar toolbar;
@@ -22,6 +30,18 @@ public class MainActivity extends ActionBarActivity {
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+        // menu
+        List<String> menu = Arrays.asList("Garage", "Kitchen", "Bedroom");
+        ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_container);
+        FloatingActionsMenu fab = new FloatingActionsMenu(this);
+
+        FloatingActionButton b1 = new FloatingActionButton(this);
+        b1.setTitle(menu.get(0));
+        b1.setIcon(R.mipmap.r_garage);
+        fab.addButton(b1);
+
+        menu_container.addView(fab);
 
     }
 
@@ -46,4 +66,9 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void toLivingroom(View view) {
+        startActivity(new Intent(getApplicationContext(), LivingroomActivity.class));
+    }
+
 }

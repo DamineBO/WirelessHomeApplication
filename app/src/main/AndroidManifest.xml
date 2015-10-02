@@ -23,12 +23,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".rooms.Garage"
-            android:label="@string/title_activity_garage" >
-        </activity>
-        <activity
-            android:name=".GarageActivity"
-            android:label="@string/title_activity_garage" >
+            android:name=".LivingroomActivity"
+            android:label="@string/title_activity_livingroom"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 

@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends ActionBarActivity {
 
-    private long splashDelay = 1000; //5 seconds
+    private long splashDelay = 3000; //5 seconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
