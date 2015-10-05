@@ -23,100 +23,45 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/textView"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true">
-        </ScrollView>
-
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/app_bar"></ScrollView>
 
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/fab_menu_container"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/fab_menu_container"
             android:layout_alignWithParentIfMissing="false"
             android:shadowColor="#ff9f9f9f"
             android:text="Add room  "
             android:textColor="#ff5090c1"
-            android:textStyle="bold|normal|italic"
-            android:layout_alignParentBottom="true"
+            android:textStyle="bold|normal|italic" />
+
+        <GridView
+            android:id="@+id/all_room_container"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/app_bar"
+            android:layout_toLeftOf="@+id/fab_menu_container"
+            android:layout_toStartOf="@+id/fab_menu_container"
+            android:numColumns="3">
+
+        </GridView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Button"
+            android:id="@+id/garageBtn"
+            android:layout_below="@+id/app_bar"
             android:layout_alignRight="@+id/fab_menu_container"
             android:layout_alignEnd="@+id/fab_menu_container" />
 
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_margin="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton"
-        android:layout_below="@+id/app_bar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/bedroom2"/>
-
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_marginTop="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton2"
-        android:src="@drawable/kitchen2"
-        android:layout_below="@+id/app_bar"
-        android:layout_toRightOf="@+id/imageButton"
-        android:layout_toEndOf="@+id/imageButton"
-        android:layout_gravity="center_horizontal|top" />
-
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton3"
-        android:src="@drawable/livingroom1"
-        android:layout_below="@+id/app_bar"
-        android:layout_toRightOf="@+id/imageButton2"
-        android:layout_toEndOf="@+id/imageButton2"
-        android:layout_gravity="right|top"
-        android:onClick="toLivingroom"/>
-
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_marginLeft="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton4"
-        android:src="@drawable/bathroom2"
-        android:layout_below="@+id/imageButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_gravity="left|center_vertical" />
-
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_marginLeft="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton5"
-        android:src="@drawable/wc2"
-        android:layout_alignTop="@+id/imageButton4"
-        android:layout_toRightOf="@+id/imageButton4"
-        android:layout_toEndOf="@+id/imageButton4"
-        android:layout_gravity="center" />
-
-
-    <ImageButton
-        android:background="#eeeeee"
-        android:layout_marginLeft="20dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageButton6"
-        android:src="@drawable/garage1"
-        android:layout_alignTop="@+id/imageButton5"
-        android:layout_toRightOf="@+id/imageButton5"
-        android:layout_toEndOf="@+id/imageButton5"
-        android:layout_gravity="right|center_vertical" />
 
     </RelativeLayout>
-
 
 
 </android.support.v4.widget.DrawerLayout>
