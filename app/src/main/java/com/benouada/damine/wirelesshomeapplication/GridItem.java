@@ -4,14 +4,27 @@ package com.benouada.damine.wirelesshomeapplication;
  * Created by Damine's on 05/10/2015.
  */
 public class GridItem {
-    String  name;
-    int     resIconId;
-    int     resIconInGridId;
+    String      name;
+    int         resIconId;
+    int         resIconInGridId;
+    ItemType type = null;
 
-    public GridItem(String name, int resIconId, int resIconInGridId) {
-        this.name = name;
-        this.resIconId = resIconId;
+
+    public enum ItemType{
+        Bedroom,
+        Kitchen,
+        Livingroom,
+        Bathroom,
+        WC,
+        Garage;
+    }
+
+
+    public GridItem(String name, int resIconId, int resIconInGridId, ItemType type) {
+        this.name            = name;
+        this.resIconId       = resIconId;
         this.resIconInGridId = resIconInGridId;
+        this.type = type;
     }
 /*
     public String getName() {
