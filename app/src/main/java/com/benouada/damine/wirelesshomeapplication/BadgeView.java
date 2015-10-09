@@ -129,15 +129,11 @@ public class BadgeView extends TextView {
 
         isShown = false;
 
-        if (this.target != null) {
-            applyTo(this.target);
-        } else {
-            show();
-        }
 
     }
+    FrameLayout container;
 
-    private void applyTo(View target) {
+    public void applyTo(View target) {
 
         LayoutParams lp = target.getLayoutParams();
         ViewParent parent = target.getParent();
@@ -158,20 +154,17 @@ public class BadgeView extends TextView {
         } else {
 
             // TODO verify that parent is indeed a ViewGroup
-            ViewGroup group = (ViewGroup) parent;
-            int index = group.indexOfChild(target);
 
-            group.removeView(target);
-            group.addView(container, index, lp);
 
             container.addView(target);
 
-            this.setVisibility(View.GONE);
+
             container.addView(this);
 
-            group.invalidate();
 
         }
+
+        this.setVisibility(View.VISIBLE);
 
     }
 

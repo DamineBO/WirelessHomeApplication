@@ -7,7 +7,7 @@ public class GridItem {
     String      name;
     int         resIconId;
     int         resIconInGridId;
-    ItemType type = null;
+    ItemType    type = null;
 
 
     public enum ItemType{
@@ -24,7 +24,7 @@ public class GridItem {
         this.name            = name;
         this.resIconId       = resIconId;
         this.resIconInGridId = resIconInGridId;
-        this.type = type;
+        this.type            = type;
     }
 /*
     public String getName() {

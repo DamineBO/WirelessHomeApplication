@@ -15,18 +15,21 @@ import java.util.List;
  */
 public class GridItemAdapter extends BaseAdapter {
     private Context context;
-    private final Integer[] icon;
-    List<String> name;
+    List<GridItem> items;
+//    Integer[] icon;
+//    List<String> name;
 
-    public GridItemAdapter(Context context, Integer[] icon, List<String> name) {
+    public GridItemAdapter(Context context, List<GridItem> items) {
         this.context = context;
-        this.icon = icon;
-        this.name = name;
+        this.items = items;
+//        this.icon = icon;
+//        this.name = name;
     }
 
     @Override
     public int getCount() {
-        return icon.length;
+        return items.size();
+//    return 0;
     }
 
     @Override
@@ -39,29 +42,43 @@ public class GridItemAdapter extends BaseAdapter {
         return 0;
     }
 
+    View gridView;
+
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View gridView;
-        if (convertView == null){
+
+        if (convertView == null) {
             gridView = new View(context);
             // get layout from mobile.xml
             gridView = inflater.inflate(R.layout.grid_item, null);
 
             // set image based on selected text
             ImageView imageView = (ImageView) gridView
-                    .findViewById(R.id.room_item_icon);
-            imageView.setImageResource(icon[position]);
+                    .findViewById(R.id.icon);
+            imageView.setImageResource(items.get(position).resIconInGridId);
 
             TextView textView = (TextView) gridView
-                    .findViewById(R.id.room_item_name);
-            textView.setText(name.get(position));
+                    .findViewById(R.id.name);
+            textView.setText((items.get(position).type).toString());
+
+            TextView textViewBagde = (TextView) gridView
+                    .findViewById(R.id.badge);
+            textViewBagde.setText("3");
 
         } else {
             gridView = (View) convertView;
         }
+        gridView.setTag(items.get(position).type);
 
+
+//        BadgeView badge = new BadgeView(parent.getContext());
+//         badge.applyTo(gridView);
+//        badge.increment(1);
+
+
+//        return badge.container;
         return gridView;
     }
 }

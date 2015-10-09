@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -39,22 +37,26 @@ public class MainActivity extends Activity {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
 
+        //view
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+        // view
+        grid = (GridView) findViewById(R.id.all_room_container);
+
+
 // Menu----------------------------
-        final List<String> name = Arrays.asList("Bedroom", "Kitchen", "Livingroom", "Bathroom", "WC", "Garage");
-        final Integer[] icon = {R.mipmap.r_bedroom, R.mipmap.r_kitchen, R.mipmap.r_livingroom, R.mipmap.r_bathroom, R.mipmap.r_wc, R.mipmap.r_garage};
-        final Integer[] iconInGrid = {R.mipmap.bedroom, R.mipmap.kitchen, R.mipmap.livingroom, R.mipmap.bathroom, R.mipmap.wc, R.mipmap.garage};
+//        final List<String> name = Arrays.asList("Bedroom", "Kitchen", "Livingroom", "Bathroom", "WC", "Garage");
+//        final Integer[] icon = {R.mipmap.r_bedroom, R.mipmap.r_kitchen, R.mipmap.r_livingroom, R.mipmap.r_bathroom, R.mipmap.r_wc, R.mipmap.r_garage};
+//        final Integer[] iconInGrid = {R.mipmap.bedroom, R.mipmap.kitchen, R.mipmap.livingroom, R.mipmap.bathroom, R.mipmap.wc, R.mipmap.garage};
 
         final List<GridItem> items = Arrays.asList(
-                new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom),
-                new GridItem("Kitchen", R.mipmap.r_kitchen, R.mipmap.kitchen, GridItem.ItemType.Kitchen),
-                new GridItem("Livingroom", R.mipmap.r_livingroom, R.mipmap.livingroom, GridItem.ItemType.Livingroom),
-                new GridItem("Bathroom", R.mipmap.r_bathroom, R.mipmap.bathroom, GridItem.ItemType.Bathroom),
-                new GridItem("WC", R.mipmap.r_wc, R.mipmap.wc, GridItem.ItemType.WC),
-                new GridItem("Garage", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage)
-        );
+                new GridItem("Bedroom"   , R.mipmap.r_bedroom   , R.mipmap.bedroom   , GridItem.ItemType.Bedroom    ),
+                new GridItem("Kitchen"   , R.mipmap.r_kitchen   , R.mipmap.kitchen   , GridItem.ItemType.Kitchen    ),
+                new GridItem("Livingroom", R.mipmap.r_livingroom, R.mipmap.livingroom, GridItem.ItemType.Livingroom ),
+                new GridItem("Bathroom"  , R.mipmap.r_bathroom  , R.mipmap.bathroom  , GridItem.ItemType.Bathroom   ),
+                new GridItem("WC"        , R.mipmap.r_wc        , R.mipmap.wc        , GridItem.ItemType.WC         ),
+                new GridItem("Garage"    , R.mipmap.r_garage    , R.mipmap.garage    , GridItem.ItemType.Garage     ));
 
         FloatingActionButton b0 = new FloatingActionButton(this);
         FloatingActionButton b1 = new FloatingActionButton(this);
@@ -73,31 +75,33 @@ public class MainActivity extends Activity {
         menu_container.addView(fab);
         // -----FAB_menu [end]
 
-
+        int i = 0;
         for (final FloatingActionButton b : button) {
             b.setTitle(String.valueOf(items.get(button.indexOf(b)).name));
-            b.setTag(items.get(button.indexOf(b)).type);
             b.setIcon(items.get(button.indexOf(b)).resIconId);
             b.setColorNormal(Color.parseColor("#FFFFFF"));
             fab.addButton(button.get(button.indexOf(b)));
+
+            /*BadgeView badge = new BadgeView(MainActivity.this, b);
+            badge.increment(i++);
+            badge.show();*/
+
+
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AlertDialog dialogInputText = new AlertDialog.Builder(MainActivity.this).create();
-                    dialogInputText.setTitle("Add " + String.valueOf(items.get(button.indexOf(b)).name));
+                    //dialogInputText.setTitle("Add " + String.valueOf(items.get(button.indexOf(b)).name));
+                    dialogInputText.setTitle(String.valueOf(items.get(button.indexOf(b)).type));
                     dialogInputText.setView(getLayoutInflater().inflate(R.layout.dialog_input_text, null));
                     dialogInputText.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             /**
                              * TODO implement OK button action here
                              */
-                           /* View target = findViewById(R.id.all_room_container);
-                            BadgeView badge = new BadgeView(MainActivity.this, target);
-                            badge.setText("1");
-                            badge.show();*/
 
-                            increment(items.get(button.indexOf(b)).type);
-
+                            //increment(items.get(button.indexOf(b)).type);
+                            Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -118,29 +122,39 @@ public class MainActivity extends Activity {
 
         //listRoom = new ArrayList<String>();
         listRoom = new ArrayList<GridItem>();
-        grid = (GridView) findViewById(R.id.all_room_container);
+
 
         // Instance of ImageAdapter Class
-        grid.setAdapter(new GridItemAdapter(this, iconInGrid, name));
+        grid.setAdapter(new GridItemAdapter(this, items));
 
-    }
 
-    public void add() {
-        ArrayAdapter<GridItem> adp = new ArrayAdapter<GridItem>(getBaseContext(),
-                R.layout.grid_item, listRoom);
-        grid.setAdapter(adp);
-        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        /*grid.post(new Runnable() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                // TODO Auto-generated method stub
+            public void run() {
+                Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
 
-                Toast.makeText(getBaseContext(), (CharSequence) listRoom.get(arg2),
-                        Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
+
     }
+
+//    public void add() {
+//        ArrayAdapter<GridItem> adp = new ArrayAdapter<GridItem>(getBaseContext(),
+//                R.layout.grid_item, listRoom);
+//        grid.setAdapter(adp);
+//        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//            @Override
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//                                    long arg3) {
+//                // TODO Auto-generated method stub
+//
+//                Toast.makeText(getBaseContext(), (CharSequence) listRoom.get(arg2),
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -164,15 +178,12 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public void setSupportActionBar(Toolbar supportActionBar) {
         this.supportActionBar = supportActionBar;
     }
 
     public void increment(GridItem.ItemType type) {
-        BadgeView badge = new BadgeView(this, grid.findViewWithTag(type));
-        badge.increment(1);
-        badge.show();
+        GridItem gi;
     }
 
     /**
