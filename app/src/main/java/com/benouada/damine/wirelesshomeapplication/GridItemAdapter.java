@@ -42,7 +42,7 @@ public class GridItemAdapter extends BaseAdapter {
         return 0;
     }
 
-    View gridView;
+    View gridItemView;
 
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
@@ -50,35 +50,35 @@ public class GridItemAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            gridView = new View(context);
             // get layout from mobile.xml
-            gridView = inflater.inflate(R.layout.grid_item, null);
+            gridItemView = inflater.inflate(R.layout.grid_item, null);
 
             // set image based on selected text
-            ImageView imageView = (ImageView) gridView
+            ImageView imageView = (ImageView) gridItemView
                     .findViewById(R.id.icon);
             imageView.setImageResource(items.get(position).resIconInGridId);
 
-            TextView textView = (TextView) gridView
+            TextView textView = (TextView) gridItemView
                     .findViewById(R.id.name);
             textView.setText((items.get(position).type).toString());
 
-            TextView textViewBagde = (TextView) gridView
+            TextView textViewBagde = (TextView) gridItemView
                     .findViewById(R.id.badge);
-            textViewBagde.setText("3");
+            textViewBagde.setText("1");
+
 
         } else {
-            gridView = (View) convertView;
+            gridItemView = (View) convertView;
         }
-        gridView.setTag(items.get(position).type);
+        gridItemView.setTag(items.get(position).type);
 
 
 //        BadgeView badge = new BadgeView(parent.getContext());
-//         badge.applyTo(gridView);
+//         badge.applyTo(gridItemView);
 //        badge.increment(1);
 
 
 //        return badge.container;
-        return gridView;
+        return gridItemView;
     }
 }

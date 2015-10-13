@@ -40,17 +40,31 @@
             android:textColor="#ff5090c1"
             android:textStyle="bold|normal|italic" />
 
-        <GridView
-            android:layout_margin="7dp"
-            android:id="@+id/all_room_container"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@+id/app_bar"
             android:layout_toLeftOf="@+id/fab_menu_container"
-            android:layout_toStartOf="@+id/fab_menu_container"
-            android:numColumns="3" >
+            android:layout_below="@+id/app_bar">
 
-        </GridView>
+            <GridView
+                android:id="@+id/all_room_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numColumns="3"
+                android:layout_gravity="center"
+                android:verticalSpacing="80dp">
+
+            </GridView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView2"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/main_grav1"
+            android:alpha="0.08"/>
 
     </RelativeLayout>
 

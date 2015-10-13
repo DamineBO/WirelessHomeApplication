@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ScrollView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -75,10 +75,13 @@ public class MainActivity extends Activity {
         menu_container.addView(fab);
         // -----FAB_menu [end]
 
+
+
         int i = 0;
         for (final FloatingActionButton b : button) {
-            b.setTitle(String.valueOf(items.get(button.indexOf(b)).name));
-            b.setIcon(items.get(button.indexOf(b)).resIconId);
+            final GridItem current = items.get(button.indexOf(b));
+            b.setTitle(String.valueOf(current.name));
+            b.setIcon(current.resIconId);
             b.setColorNormal(Color.parseColor("#FFFFFF"));
             fab.addButton(button.get(button.indexOf(b)));
 
@@ -86,13 +89,12 @@ public class MainActivity extends Activity {
             badge.increment(i++);
             badge.show();*/
 
-
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(final View v) {
                     AlertDialog dialogInputText = new AlertDialog.Builder(MainActivity.this).create();
-                    //dialogInputText.setTitle("Add " + String.valueOf(items.get(button.indexOf(b)).name));
-                    dialogInputText.setTitle(String.valueOf(items.get(button.indexOf(b)).type));
+                    //dialogInputText.setTitle("Add " + String.valueOf(current.name));
+                    dialogInputText.setTitle(String.valueOf(current.type));
                     dialogInputText.setView(getLayoutInflater().inflate(R.layout.dialog_input_text, null));
                     dialogInputText.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -100,14 +102,21 @@ public class MainActivity extends Activity {
                              * TODO implement OK button action here
                              */
 
-                            //increment(items.get(button.indexOf(b)).type);
-                            Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
+                            //increment(current.type);
+                            final TextView textViewToChange = (TextView) findViewById(R.id.badge);
+                            textViewToChange.setText("2");
 
+                            //grid.setAdapter(new GridItemAdapter(getApplicationContext(), items));
                         }
                     });
+
                     dialogInputText.show();
+
                 }
+
             });
+
         }
 
 // ----------------------------Menu [end]
@@ -183,7 +192,13 @@ public class MainActivity extends Activity {
     }
 
     public void increment(GridItem.ItemType type) {
-        GridItem gi;
+        GridItem gi = null;
+        TextView tv;
+
+        while (gi.type == type) {
+            tv = (TextView) findViewById(R.id.badge);
+            tv.setText(String.valueOf(findViewById(R.id.badge)) + 1);
+        }
     }
 
     /**

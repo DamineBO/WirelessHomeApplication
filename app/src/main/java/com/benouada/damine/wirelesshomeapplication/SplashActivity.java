@@ -1,16 +1,16 @@
 package com.benouada.damine.wirelesshomeapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends Activity {
 
-    private long splashDelay = 3000; //5 seconds
+    private long splashDelay = 1; //en milli sec
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
