@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -77,12 +78,13 @@ public class MainActivity extends Activity {
 
 
 
-        int i = 0;
+//        final int i = 0;
         for (final FloatingActionButton b : button) {
             final GridItem current = items.get(button.indexOf(b));
-            b.setTitle(String.valueOf(current.name));
+//            b.setTitle(String.valueOf(current.name));
             b.setIcon(current.resIconId);
             b.setColorNormal(Color.parseColor("#FFFFFF"));
+            b.setTag(current.type);
             fab.addButton(button.get(button.indexOf(b)));
 
             /*BadgeView badge = new BadgeView(MainActivity.this, b);
@@ -102,10 +104,12 @@ public class MainActivity extends Activity {
                              * TODO implement OK button action here
                              */
 
+                            Toast.makeText(MainActivity.this, "" + grid.getChildAt(button.indexOf(b)).getTag(), Toast.LENGTH_LONG).show();
+//                            grid.getChildAt(4).getTag().toString();
                             //Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
                             //increment(current.type);
-                            final TextView textViewToChange = (TextView) findViewById(R.id.badge);
-                            textViewToChange.setText("2");
+                            //final TextView textViewToChange = (TextView) findViewById(R.id.badge);
+                            //textViewToChange.setText("2");
 
                             //grid.setAdapter(new GridItemAdapter(getApplicationContext(), items));
                         }
