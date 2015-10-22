@@ -14,14 +14,14 @@
             android:id="@+id/fab_menu_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textView"
+            android:layout_above="@+id/add_room"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_below="@id/app_bar"/>
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/add_room"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/fab_menu_container"
@@ -54,9 +54,9 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView2"
+            android:id="@+id/main_background"
             android:layout_centerInParent="true"
-            android:src="@mipmap/main_grav4"
+            android:src="@mipmap/main_background"
             android:alpha="0.08"/>
 
     </RelativeLayout>

@@ -3,6 +3,7 @@ package com.benouada.damine.wirelesshomeapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -26,6 +28,8 @@ public class MainActivity extends Activity {
     // --------------------------------------*******
     GridView grid;
     List<GridItem> listRoom;
+    RoomRepository roomRepository = new RoomRepository();
+    List<GridItem> items = new ArrayList<>();
 
     // --------------------------------------*******
 
@@ -51,13 +55,13 @@ public class MainActivity extends Activity {
 //        final Integer[] icon = {R.mipmap.r_bedroom, R.mipmap.r_kitchen, R.mipmap.r_livingroom, R.mipmap.r_bathroom, R.mipmap.r_wc, R.mipmap.r_garage};
 //        final Integer[] iconInGrid = {R.mipmap.bedroom, R.mipmap.kitchen, R.mipmap.livingroom, R.mipmap.bathroom, R.mipmap.wc, R.mipmap.garage};
 
-        final List<GridItem> items = Arrays.asList(
-                new GridItem("Bedroom"   , R.mipmap.r_bedroom   , R.mipmap.bedroom   , GridItem.ItemType.Bedroom    ),
-                new GridItem("Kitchen"   , R.mipmap.r_kitchen   , R.mipmap.kitchen   , GridItem.ItemType.Kitchen    ),
-                new GridItem("Livingroom", R.mipmap.r_livingroom, R.mipmap.livingroom, GridItem.ItemType.Livingroom ),
-                new GridItem("Bathroom"  , R.mipmap.r_bathroom  , R.mipmap.bathroom  , GridItem.ItemType.Bathroom   ),
-                new GridItem("WC"        , R.mipmap.r_wc        , R.mipmap.wc        , GridItem.ItemType.WC         ),
-                new GridItem("Garage"    , R.mipmap.r_garage    , R.mipmap.garage    , GridItem.ItemType.Garage     ));
+
+        items.add(new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom));
+        items.add(new GridItem("Kitchen", R.mipmap.r_kitchen, R.mipmap.kitchen, GridItem.ItemType.Kitchen));
+        items.add(new GridItem("Livingroom", R.mipmap.r_livingroom, R.mipmap.livingroom, GridItem.ItemType.Livingroom));
+        items.add(new GridItem("Bathroom", R.mipmap.r_bathroom, R.mipmap.bathroom, GridItem.ItemType.Bathroom));
+        items.add(new GridItem("WC", R.mipmap.r_wc, R.mipmap.wc, GridItem.ItemType.WC));
+        items.add(new GridItem("Garage", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
 
         FloatingActionButton b0 = new FloatingActionButton(this);
         FloatingActionButton b1 = new FloatingActionButton(this);
@@ -75,7 +79,6 @@ public class MainActivity extends Activity {
         FloatingActionsMenu fab = new FloatingActionsMenu(this);
         menu_container.addView(fab);
         // -----FAB_menu [end]
-
 
 
 //        final int i = 0;
@@ -103,8 +106,15 @@ public class MainActivity extends Activity {
                             /**
                              * TODO implement OK button action here
                              */
+                            TextView dialogTextName = (TextView) findViewById(R.id.dialog_text_name);
+                            roomRepository.addRoom(new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom));
 
-                            Toast.makeText(MainActivity.this, "" + grid.getChildAt(button.indexOf(b)).getTag(), Toast.LENGTH_LONG).show();
+
+                            ((GridItemAdapter) grid.getAdapter()).items.add(
+                                    new GridItem("Garage7", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
+                            ((GridItemAdapter) grid.getAdapter()).notifyDataSetChanged();
+
+                            Toast.makeText(MainActivity.this, grid.getChildAt(button.indexOf(b)).getTag() + " successfully created", Toast.LENGTH_LONG).show();
 //                            grid.getChildAt(4).getTag().toString();
                             //Toast.makeText(MainActivity.this, "" + grid.getChildCount(), Toast.LENGTH_LONG).show();
                             //increment(current.type);
@@ -112,6 +122,7 @@ public class MainActivity extends Activity {
                             //textViewToChange.setText("2");
 
                             //grid.setAdapter(new GridItemAdapter(getApplicationContext(), items));
+
                         }
                     });
 
@@ -205,13 +216,19 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void itemClick(View view) {
+        if (!roomRepository.getItemsRoom().isEmpty()) {
+            Intent intent = new Intent(this, RoomActivity.class);
+            startActivity(intent);
+        }
+    }
+
     /**
      * Add item to GridView that must contain all "rooms" or "devices"...
      * To entre to a specific room
      public void toLivingroom(View view) {
      startActivity(new Intent(getApplicationContext(), LivingroomActivity.class));
      }*/
-
 
     /**
      * Add item to GridView that must contain all "rooms" or "devices"...

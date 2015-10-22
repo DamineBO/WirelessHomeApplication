@@ -1,0 +1,62 @@
+<RelativeLayout
+    android:id="@+id/livingroomRLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LivingroomActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/app_bar"
+        layout="@layout/app_bar" />
+
+    <ScrollView
+        android:id="@+id/fab_menu_devices_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_device"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/app_bar"/>
+
+
+    <TextView
+        android:id="@+id/add_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/fab_menu_devices_container"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/fab_menu_devices_container"
+        android:layout_alignWithParentIfMissing="false"
+        android:shadowColor="#ff9f9f9f"
+        android:text="Add device  "
+        android:textColor="#ff5090c1"
+        android:textStyle="bold|normal|italic" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/fab_menu_devices_container"
+        android:layout_below="@+id/app_bar">
+
+        <GridView
+            android:id="@+id/all_devices_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numColumns="3"
+            android:layout_gravity="center"
+            android:verticalSpacing="80dp">
+
+        </GridView>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/room_background"
+        android:layout_centerInParent="true"
+        android:alpha="0.08"/>
+
+</RelativeLayout>
+

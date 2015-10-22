@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,27 +13,23 @@ import java.util.List;
 /**
  * Created by Damine's on 05/10/2015.
  */
-public class GridItemAdapter extends BaseAdapter {
+public class GridItemAdapter extends ArrayAdapter<GridItem> {
     private Context context;
     List<GridItem> items;
-//    Integer[] icon;
-//    List<String> name;
 
     public GridItemAdapter(Context context, List<GridItem> items) {
+        super(context, R.layout.grid_item, items);
         this.context = context;
         this.items = items;
-//        this.icon = icon;
-//        this.name = name;
     }
 
     @Override
     public int getCount() {
         return items.size();
-//    return 0;
     }
 
     @Override
-    public Object getItem(int position) {
+    public GridItem getItem(int position) {
         return null;
     }
 
@@ -60,7 +56,7 @@ public class GridItemAdapter extends BaseAdapter {
 
             TextView textView = (TextView) gridItemView
                     .findViewById(R.id.name);
-            textView.setText((items.get(position).type).toString());
+            textView.setText((items.get(position).name).toString());
 
             TextView textViewBagde = (TextView) gridItemView
                     .findViewById(R.id.badge);
@@ -70,6 +66,16 @@ public class GridItemAdapter extends BaseAdapter {
         } else {
             gridItemView = (View) convertView;
         }
+
+/*
+        gridItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+*/
+
         gridItemView.setTag(items.get(position).type);
 
 
@@ -81,4 +87,5 @@ public class GridItemAdapter extends BaseAdapter {
 //        return badge.container;
         return gridItemView;
     }
+
 }
