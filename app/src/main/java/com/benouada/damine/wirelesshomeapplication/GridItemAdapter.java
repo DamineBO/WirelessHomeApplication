@@ -30,42 +30,42 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
 
     @Override
     public GridItem getItem(int position) {
-        return null;
+        return items.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     View gridItemView;
 
     @Override
     public View getView(int position, View convertView, final ViewGroup parent) {
+
+
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (convertView == null) {
-            // get layout from mobile.xml
-            gridItemView = inflater.inflate(R.layout.grid_item, null);
-
-            // set image based on selected text
-            ImageView imageView = (ImageView) gridItemView
-                    .findViewById(R.id.icon);
-            imageView.setImageResource(items.get(position).resIconInGridId);
-
-            TextView textView = (TextView) gridItemView
-                    .findViewById(R.id.name);
-            textView.setText((items.get(position).name).toString());
-
-            TextView textViewBagde = (TextView) gridItemView
-                    .findViewById(R.id.badge);
-            textViewBagde.setText("1");
+        // get layout from mobile.xml
+        gridItemView = inflater.inflate(R.layout.grid_item, null);
 
 
-        } else {
-            gridItemView = (View) convertView;
-        }
+        GridItem current = getItem(position);
+        gridItemView.setTag(current.type);
+
+
+        // set image based on selected text
+        ImageView imageView = (ImageView) gridItemView
+                .findViewById(R.id.icon);
+        imageView.setImageResource(current.resIconInGridId);
+
+        TextView textView = (TextView) gridItemView
+                .findViewById(R.id.name);
+        textView.setText((current.name).toString());
+
+        TextView textViewBagde = (TextView) gridItemView
+                .findViewById(R.id.badge);
+        textViewBagde.setText("" + current.badge);
 
 /*
         gridItemView.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,7 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
         });
 */
 
-        gridItemView.setTag(items.get(position).type);
+
 
 
 //        BadgeView badge = new BadgeView(parent.getContext());

@@ -17,8 +17,8 @@
             android:layout_above="@+id/add_room"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_below="@id/app_bar"/>
-
 
         <TextView
             android:id="@+id/add_room"

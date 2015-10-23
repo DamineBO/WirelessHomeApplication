@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,7 +28,6 @@ public class MainActivity extends Activity {
 
     // --------------------------------------*******
     GridView grid;
-    List<GridItem> listRoom;
     RoomRepository roomRepository = new RoomRepository();
     List<GridItem> items = new ArrayList<>();
 
@@ -46,8 +46,17 @@ public class MainActivity extends Activity {
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+
+
         // view
         grid = (GridView) findViewById(R.id.all_room_container);
+        // Instance of ImageAdapter Class
+        grid.setAdapter(new GridItemAdapter(this, items));
+
+
+
+
+
 
 
 // Menu----------------------------
@@ -95,24 +104,37 @@ public class MainActivity extends Activity {
             badge.show();*/
 
             b.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(final View v) {
                     AlertDialog dialogInputText = new AlertDialog.Builder(MainActivity.this).create();
                     //dialogInputText.setTitle("Add " + String.valueOf(current.name));
                     dialogInputText.setTitle(String.valueOf(current.type));
-                    dialogInputText.setView(getLayoutInflater().inflate(R.layout.dialog_input_text, null));
+
+
+                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+                    final EditText dialogTextName = (EditText) dialogView.findViewById(R.id.dialog_text_name);
+
+                    dialogInputText.setView(dialogView);
                     dialogInputText.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             /**
                              * TODO implement OK button action here
                              */
-                            TextView dialogTextName = (TextView) findViewById(R.id.dialog_text_name);
-                            roomRepository.addRoom(new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom));
 
 
-                            ((GridItemAdapter) grid.getAdapter()).items.add(
-                                    new GridItem("Garage7", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
+                            // grid type
+                            GridItem.ItemType type = current.type;
+                            String name = dialogTextName.getText().toString();
+                            GridItem tobeadded = GridItem.Bedroom(name, type);
+
+                            // badge Type ++
+                            ((GridItemAdapter) grid.getAdapter()).items.get(button.indexOf(b)).badge++;
                             ((GridItemAdapter) grid.getAdapter()).notifyDataSetChanged();
+
+                            // item Type add
+                            roomRepository.addRoom(tobeadded);
+
 
                             Toast.makeText(MainActivity.this, grid.getChildAt(button.indexOf(b)).getTag() + " successfully created", Toast.LENGTH_LONG).show();
 //                            grid.getChildAt(4).getTag().toString();
@@ -131,7 +153,6 @@ public class MainActivity extends Activity {
                 }
 
             });
-
         }
 
 // ----------------------------Menu [end]
@@ -145,11 +166,10 @@ public class MainActivity extends Activity {
         //------------------ BADGE [end]----------------------
 
         //listRoom = new ArrayList<String>();
-        listRoom = new ArrayList<GridItem>();
 
 
-        // Instance of ImageAdapter Class
-        grid.setAdapter(new GridItemAdapter(this, items));
+
+
 
 
         /*grid.post(new Runnable() {

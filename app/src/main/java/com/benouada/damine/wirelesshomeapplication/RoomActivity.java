@@ -1,6 +1,7 @@
 package com.benouada.damine.wirelesshomeapplication;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -45,18 +46,19 @@ public class RoomActivity extends AppCompatActivity {
 // Menu----------------------------
 
         FloatingActionButton b0 = new FloatingActionButton(this);
-        FloatingActionButton b1 = new FloatingActionButton(this);
 
-        final List<FloatingActionButton> button = Arrays.asList(b0,b1);
+        final List<FloatingActionButton> button = Arrays.asList(b0);
 
         ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_devices_container);
 
         // FAB_menu-----
         FloatingActionsMenu fab = new FloatingActionsMenu(this);
         menu_container.addView(fab);
+
+
         // -----FAB_menu [end]
 
-        /*for (final FloatingActionButton b : button) {
+        for (final FloatingActionButton b : button) {
             final GridItem current = roomRepository.getItemsRoom().get(button.indexOf(b));
 
             b.setIcon(current.resIconId);
@@ -64,7 +66,7 @@ public class RoomActivity extends AppCompatActivity {
             b.setTag(current.type);
             fab.addButton(button.get(button.indexOf(b)));
 
-            *//*b.setOnClickListener(new View.OnClickListener() {
+            /*b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     AlertDialog dialogInputText = new AlertDialog.Builder(RoomActivity.this).create();
@@ -81,8 +83,8 @@ public class RoomActivity extends AppCompatActivity {
                     dialogInputText.show();
                 }
 
-            });*//*
-        }*/
+            });*/
+        }
 
 // ----------------------------Menu [end]
 
