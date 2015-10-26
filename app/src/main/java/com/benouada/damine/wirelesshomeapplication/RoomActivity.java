@@ -89,7 +89,8 @@ public class RoomActivity extends AppCompatActivity {
 // ----------------------------Menu [end]
 
         // Instance of ImageAdapter Class
-        grid.setAdapter(new GridItemAdapter(this, roomRepository.getItemsRoom()));
+
+        grid.setAdapter(new GridItemAdapter(this,    roomRepository.getItemsRoomByType(getIntent().getStringExtra("type"))));
 
     }
 

@@ -15,6 +15,17 @@ public class RoomRepository {
         return itemsRoom;
     }
 
+
+    public List<GridItem> getItemsRoomByType(String type) {
+        List<GridItem> rooms = new ArrayList<>();
+        for(GridItem i: itemsRoom){
+            if(type.equals(i.type.name())){
+                rooms.add(i);
+            }
+        }
+        return rooms;
+    }
+
     public void setItemsRoom(List<GridItem> itemsRoom) {
         this.itemsRoom = itemsRoom;
     }

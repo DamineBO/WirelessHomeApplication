@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:gravity="top|center"
-        android:orientation="vertical"
-        android:onClick="itemClick">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/icon"

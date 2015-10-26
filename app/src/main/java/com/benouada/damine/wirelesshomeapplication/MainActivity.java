@@ -3,7 +3,6 @@ package com.benouada.damine.wirelesshomeapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -51,7 +50,7 @@ public class MainActivity extends Activity {
         // view
         grid = (GridView) findViewById(R.id.all_room_container);
         // Instance of ImageAdapter Class
-        grid.setAdapter(new GridItemAdapter(this, items));
+
 
 
 
@@ -71,6 +70,8 @@ public class MainActivity extends Activity {
         items.add(new GridItem("Bathroom", R.mipmap.r_bathroom, R.mipmap.bathroom, GridItem.ItemType.Bathroom));
         items.add(new GridItem("WC", R.mipmap.r_wc, R.mipmap.wc, GridItem.ItemType.WC));
         items.add(new GridItem("Garage", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
+        grid.setAdapter(new GridItemAdapter(this, items));
+
 
         FloatingActionButton b0 = new FloatingActionButton(this);
         FloatingActionButton b1 = new FloatingActionButton(this);
@@ -236,11 +237,14 @@ public class MainActivity extends Activity {
         }
     }
 
+   // int position = (int)grid.getTag();
     public void itemClick(View view) {
-        if (!roomRepository.getItemsRoom().isEmpty()) {
+        /*if (!roomRepository.getItemsRoom().isEmpty()) {
             Intent intent = new Intent(this, RoomActivity.class);
+            GridItem selected = ((GridItemAdapter) grid.getAdapter()).getSelectedItem();
+              intent.putExtra("type", selected !=null?selected.type.name():"none");
             startActivity(intent);
-        }
+        }*/
     }
 
     /**

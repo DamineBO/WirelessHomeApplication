@@ -1,12 +1,15 @@
 package com.benouada.damine.wirelesshomeapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
 
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
         gridItemView = inflater.inflate(R.layout.grid_item, null);
 
 
-        GridItem current = getItem(position);
+       final GridItem current = getItem(position);
         gridItemView.setTag(current.type);
 
 
@@ -77,15 +80,36 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
 */
 
 
-
-
 //        BadgeView badge = new BadgeView(parent.getContext());
 //         badge.applyTo(gridItemView);
 //        badge.increment(1);
 
 
 //        return badge.container;
+
+        if (gridItemView.isSelected()) {
+            selectedItem = current;
+        }
+
+        gridItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!new RoomRepository().getItemsRoomByType(current.type.name()).isEmpty()) {
+                    Intent intent = new Intent(context, RoomActivity.class);
+                    intent.putExtra("type", current.type.name());
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+
+
         return gridItemView;
     }
 
+    GridItem selectedItem = null;
+
+    public GridItem getSelectedItem() {
+        return selectedItem;
+    }
 }

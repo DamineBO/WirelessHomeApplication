@@ -7,7 +7,7 @@ public class GridItem {
     String name;
     int resIconId;
     int resIconInGridId;
-    ItemType type = null;
+    public ItemType type = null;
     int badge = 0;
 
 
