@@ -56,7 +56,6 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
        final GridItem current = getItem(position);
         gridItemView.setTag(current.type);
 
-
         // set image based on selected text
         ImageView imageView = (ImageView) gridItemView
                 .findViewById(R.id.icon);
@@ -70,25 +69,12 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
                 .findViewById(R.id.badge);
         textViewBagde.setText("" + current.badge);
 
-/*
-        gridItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-*/
-
-
-//        BadgeView badge = new BadgeView(parent.getContext());
-//         badge.applyTo(gridItemView);
-//        badge.increment(1);
-
-
-//        return badge.container;
-
         if (gridItemView.isSelected()) {
             selectedItem = current;
+        }
+
+        if (current.badge != 0){
+            textViewBagde.setVisibility(View.VISIBLE);
         }
 
         gridItemView.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +87,6 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
                 }
             }
         });
-
-
 
         return gridItemView;
     }

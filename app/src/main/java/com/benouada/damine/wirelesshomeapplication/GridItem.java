@@ -29,9 +29,6 @@ public class GridItem {
 
     public static GridItem Bedroom(String name, ItemType type) {
 
-        int resId;
-        int icon;
-
         return new GridItem(name, R.mipmap.r_bedroom, R.mipmap.bedroom, type);
     }
 

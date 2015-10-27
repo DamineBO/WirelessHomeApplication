@@ -1,7 +1,5 @@
 package com.benouada.damine.wirelesshomeapplication;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,14 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
-
-import java.util.Arrays;
-import java.util.List;
+import com.getbase.floatingactionbutton.AddFloatingActionButton;
 
 public class RoomActivity extends AppCompatActivity {
 
@@ -40,25 +34,29 @@ public class RoomActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // view
-        grid = (GridView) findViewById(R.id.all_devices_container);
+        grid = (GridView) findViewById(R.id.rooms_by_type_container);
 
 
 // Menu----------------------------
 
-        FloatingActionButton b0 = new FloatingActionButton(this);
+        //final List<FloatingActionButton> button = Arrays.asList(b0);
 
-        final List<FloatingActionButton> button = Arrays.asList(b0);
-
-        ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_devices_container);
+/*        ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_devices_container);
 
         // FAB_menu-----
         FloatingActionsMenu fab = new FloatingActionsMenu(this);
-        menu_container.addView(fab);
-
-
+        //menu_container.addView(fab);
         // -----FAB_menu [end]
 
-        for (final FloatingActionButton b : button) {
+        //GridItem current = roomRepository.getItemsRoom().get(roomRepository.getItemsRoom().size() - 1);
+        FloatingActionButton b0 = new FloatingActionButton(this);
+        b0.setIcon(R.mipmap.ic_add);
+        b0.setColorNormal(Color.parseColor("#ff5090c1"));
+        //b0.setTag(current.type);
+        menu_container.addView(b0);
+        //fab.addButton(b0);*/
+
+        /*for (final FloatingActionButton b : button) {
             final GridItem current = roomRepository.getItemsRoom().get(button.indexOf(b));
 
             b.setIcon(current.resIconId);
@@ -66,7 +64,7 @@ public class RoomActivity extends AppCompatActivity {
             b.setTag(current.type);
             fab.addButton(button.get(button.indexOf(b)));
 
-            /*b.setOnClickListener(new View.OnClickListener() {
+            *//*b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
                     AlertDialog dialogInputText = new AlertDialog.Builder(RoomActivity.this).create();
@@ -74,23 +72,26 @@ public class RoomActivity extends AppCompatActivity {
                     dialogInputText.setView(getLayoutInflater().inflate(R.layout.dialog_input_text, null));
                     dialogInputText.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            *//**//**
+                            *//**//**//**//**
                              * TODO implement OK button action here
-                             *//**//*
+                             *//**//**//**//*
                             Toast.makeText(RoomActivity.this, "" + grid.getChildAt(button.indexOf(b)).getTag(), Toast.LENGTH_LONG).show();
                         }
                     });
                     dialogInputText.show();
                 }
 
-            });*/
-        }
+            });*//*
+        }*/
+
+        AddFloatingActionButton fabAdd = (AddFloatingActionButton) findViewById(R.id.fab_add);
+
 
 // ----------------------------Menu [end]
 
         // Instance of ImageAdapter Class
 
-        grid.setAdapter(new GridItemAdapter(this,    roomRepository.getItemsRoomByType(getIntent().getStringExtra("type"))));
+        grid.setAdapter(new GridItemAdapter(this, roomRepository.getItemsRoomByType(getIntent().getStringExtra("type"))));
 
     }
 
@@ -116,9 +117,13 @@ public class RoomActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void itemClick(View view){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    /**
+     * OnClick action of fab_add button
+     *
+     * @param view
+     */
+    public void fabAddClick(View view){
+        Toast.makeText(this, "No actions for this button yet !!!", Toast.LENGTH_LONG).show();
     }
 
 }

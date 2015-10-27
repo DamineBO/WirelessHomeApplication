@@ -31,7 +31,8 @@
             android:paddingRight="3dp"
             android:text="0"
             android:textColor="#FFFFFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible"/>
     </RelativeLayout>
 
     <TextView
