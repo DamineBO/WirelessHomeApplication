@@ -17,7 +17,8 @@ public class GridItem {
         Livingroom,
         Bathroom,
         WC,
-        Garage;
+        Garage,
+        Light;
     }
 
     public GridItem(String name, int resIconId, int resIconInGridId, ItemType type) {
@@ -27,6 +28,8 @@ public class GridItem {
         this.type = type;
     }
 
+
+    // Rooms Constructors :
     public static GridItem Bedroom(String name, ItemType type) {
 
         return new GridItem(name, R.mipmap.r_bedroom, R.mipmap.bedroom, type);
@@ -57,23 +60,9 @@ public class GridItem {
         return new GridItem(name, R.mipmap.r_garage, R.mipmap.garage, type);
     }
 
-
-
-
-/*
-    public String getName() {
-        return name;
+    // Devices Constructors :
+    public static GridItem Light(String name, ItemType type) {
+        return new GridItem(name, R.mipmap.r_light, R.mipmap.light, type);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getIcon() {
-        return resIconId;
-    }
-
-    public void setIcon(Integer icon) {
-        this.resIconId = resIconId;
-    }*/
 }

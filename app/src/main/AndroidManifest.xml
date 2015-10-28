@@ -29,6 +29,11 @@
             android:label=""
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name=".DeviceCategoriesActivity"
+            android:label=""
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>

@@ -3,7 +3,6 @@ package com.benouada.damine.wirelesshomeapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends Activity implements GridItemAdapter.OnClickListener {
+/**
+ * Created by Damine's on 28/10/2015.
+ */
+public class DeviceCategoriesActivity extends Activity implements GridItemAdapter.OnClickListener {
 
     GridView grid;
     List<GridItem> items = new ArrayList<>();
@@ -32,8 +34,8 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
     private Toolbar supportActionBar;
 
     @Override
-    protected void onCreate(Bundle state) {
-        super.onCreate(state);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //view
@@ -43,26 +45,16 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
         // view
         grid = (GridView) findViewById(R.id.all_room_container);
 
-// Menu----------------------------
+        // Menu----------------------------
 
-        items.add(new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom));
-        items.add(new GridItem("Kitchen", R.mipmap.r_kitchen, R.mipmap.kitchen, GridItem.ItemType.Kitchen));
-        items.add(new GridItem("Livingroom", R.mipmap.r_livingroom, R.mipmap.livingroom, GridItem.ItemType.Livingroom));
-        items.add(new GridItem("Bathroom", R.mipmap.r_bathroom, R.mipmap.bathroom, GridItem.ItemType.Bathroom));
-        items.add(new GridItem("WC", R.mipmap.r_wc, R.mipmap.wc, GridItem.ItemType.WC));
-        items.add(new GridItem("Garage", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
+        items.add(new GridItem("Light", R.mipmap.r_light, R.mipmap.light, GridItem.ItemType.Light));
         // Instance of ImageAdapter Class
         grid.setAdapter(new GridItemAdapter(this, items, this));
 
 
         FloatingActionButton b0 = new FloatingActionButton(this);
-        FloatingActionButton b1 = new FloatingActionButton(this);
-        FloatingActionButton b2 = new FloatingActionButton(this);
-        FloatingActionButton b3 = new FloatingActionButton(this);
-        FloatingActionButton b4 = new FloatingActionButton(this);
-        FloatingActionButton b5 = new FloatingActionButton(this);
 
-        final List<FloatingActionButton> button = Arrays.asList(b0, b1, b2, b3, b4, b5);
+        final List<FloatingActionButton> button = Arrays.asList(b0);
 
         ScrollView menu_container = (ScrollView) findViewById(R.id.fab_menu_container);
 
@@ -85,7 +77,7 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
 
                 @Override
                 public void onClick(final View v) {
-                    AlertDialog dialogInputText = new AlertDialog.Builder(MainActivity.this).create();
+                    AlertDialog dialogInputText = new AlertDialog.Builder(DeviceCategoriesActivity.this).create();
                     //dialogInputText.setTitle("Add " + String.valueOf(current.name));
                     dialogInputText.setTitle(String.valueOf(current.type));
 
@@ -113,7 +105,7 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
                             ((WirelessHomeApplication)getApplication()).roomRepository.addRoom(toBeAdded);
 
 
-                            Toast.makeText(MainActivity.this, grid.getChildAt(button.indexOf(b)).getTag() + " successfully created", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DeviceCategoriesActivity.this, grid.getChildAt(button.indexOf(b)).getTag() + " successfully created", Toast.LENGTH_LONG).show();
 
                         }
                     });
@@ -155,17 +147,6 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
     public void setSupportActionBar(Toolbar supportActionBar) {
         this.supportActionBar = supportActionBar;
     }
-
-    /*public void increment(GridItem.ItemType type) {
-        GridItem gi = null;
-        TextView tv;
-
-        while (gi.type == type) {
-            tv = (TextView) findViewById(R.id.badge);
-            tv.setText(String.valueOf(findViewById(R.id.badge)) + 1);
-        }
-    }*/
-
     /**
      * Add item to GridView that must contain all "rooms" or "devices" with :
      * the name (taken from the dialog inputText)
@@ -178,28 +159,17 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
      */
     public GridItem addRoom(String name, GridItem.ItemType type) {
         GridItem toBeAdded = null;
-        if (type == GridItem.ItemType.Bedroom) {
-            toBeAdded = GridItem.Bedroom(name, type);
-        } else if (type == GridItem.ItemType.Kitchen) {
-            toBeAdded = GridItem.Kitchen(name, type);
-        } else if (type == GridItem.ItemType.Livingroom) {
-            toBeAdded = GridItem.Livingroom(name, type);
-        } else if (type == GridItem.ItemType.Bathroom) {
-            toBeAdded = GridItem.Bathroom(name, type);
-        } else if (type == GridItem.ItemType.WC) {
-            toBeAdded = GridItem.WC(name, type);
-        } else toBeAdded = GridItem.Garage(name, type);
+        if (type == GridItem.ItemType.Light) {
+            toBeAdded = GridItem.Light(name, type);
+        }
+        /*else toBeAdded = GridItem.Garage(name, type);*/
         return toBeAdded;
     }
 
 
     @Override
     public void onClick(View v, GridItem item) {
-        if (!((WirelessHomeApplication)getApplication()).roomRepository.getItemsRoomByType(item.type.name()).isEmpty()) {
-            Intent intent = new Intent(this, RoomActivity.class);
-            intent.putExtra("type", item.type.name());
-            startActivity(intent);
-        }else Toast.makeText(this, "There are no rooms in this Category", Toast.LENGTH_LONG).show();
-    }
+        Toast.makeText(this, "Hi I'm Light", Toast.LENGTH_LONG).show();
 
+    }
 }

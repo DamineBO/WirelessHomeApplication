@@ -87,6 +87,7 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
                     public void onClick(View v) {
                         mOnClickListener.onClick(v, current);
                     }
+
                 }
         );
 

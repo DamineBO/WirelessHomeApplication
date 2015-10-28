@@ -1,5 +1,6 @@
 package com.benouada.damine.wirelesshomeapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -131,6 +132,8 @@ public class RoomActivity extends AppCompatActivity implements GridItemAdapter.O
 
     @Override
     public void onClick(View v, GridItem item) {
-        Toast.makeText(this, "Teeeeeest !!!", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DeviceCategoriesActivity.class);
+        intent.putExtra("type", item.type.name());
+        startActivity(intent);
     }
 }
