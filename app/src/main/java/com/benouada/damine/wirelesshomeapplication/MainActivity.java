@@ -3,6 +3,7 @@ package com.benouada.damine.wirelesshomeapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,6 @@ import android.widget.GridView;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -22,10 +22,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements GridItemAdapter.OnClickListener {
 
     GridView grid;
-    RoomRepository roomRepository = new RoomRepository();
     List<GridItem> items = new ArrayList<>();
 
 
@@ -53,7 +52,7 @@ public class MainActivity extends Activity {
         items.add(new GridItem("WC", R.mipmap.r_wc, R.mipmap.wc, GridItem.ItemType.WC));
         items.add(new GridItem("Garage", R.mipmap.r_garage, R.mipmap.garage, GridItem.ItemType.Garage));
         // Instance of ImageAdapter Class
-        grid.setAdapter(new GridItemAdapter(this, items));
+        grid.setAdapter(new GridItemAdapter(this, items, this));
 
 
         FloatingActionButton b0 = new FloatingActionButton(this);
@@ -111,7 +110,7 @@ public class MainActivity extends Activity {
                             ((GridItemAdapter) grid.getAdapter()).notifyDataSetChanged();
 
                             // item Type add
-                            roomRepository.addRoom(toBeAdded);
+                            ((WirelessHomeApplication)getApplication()).roomRepository.addRoom(toBeAdded);
 
 
                             Toast.makeText(MainActivity.this, grid.getChildAt(button.indexOf(b)).getTag() + " successfully created", Toast.LENGTH_LONG).show();
@@ -175,19 +174,32 @@ public class MainActivity extends Activity {
      *
      * @param name gridItem name (room name).
      * @param type gridItem type (room type).
-     *
      * @return the gridItem to Be Added on the grid
-     *
      */
-    public GridItem addRoom(String name, GridItem.ItemType type){
+    public GridItem addRoom(String name, GridItem.ItemType type) {
         GridItem toBeAdded = null;
-        if (type == GridItem.ItemType.Bedroom){toBeAdded = GridItem.Bedroom(name, type);}
-        else if (type == GridItem.ItemType.Kitchen){toBeAdded = GridItem.Kitchen(name, type);}
-        else if (type == GridItem.ItemType.Livingroom){toBeAdded = GridItem.Livingroom(name, type);}
-        else if (type == GridItem.ItemType.Bathroom){toBeAdded = GridItem.Bathroom(name, type);}
-        else if (type == GridItem.ItemType.WC){toBeAdded = GridItem.WC(name, type);}
-        else toBeAdded = GridItem.Garage(name, type);
+        if (type == GridItem.ItemType.Bedroom) {
+            toBeAdded = GridItem.Bedroom(name, type);
+        } else if (type == GridItem.ItemType.Kitchen) {
+            toBeAdded = GridItem.Kitchen(name, type);
+        } else if (type == GridItem.ItemType.Livingroom) {
+            toBeAdded = GridItem.Livingroom(name, type);
+        } else if (type == GridItem.ItemType.Bathroom) {
+            toBeAdded = GridItem.Bathroom(name, type);
+        } else if (type == GridItem.ItemType.WC) {
+            toBeAdded = GridItem.WC(name, type);
+        } else toBeAdded = GridItem.Garage(name, type);
         return toBeAdded;
+    }
+
+
+    @Override
+    public void onClick(View v, GridItem item) {
+        if (!((WirelessHomeApplication)getApplication()).roomRepository.getItemsRoomByType(item.type.name()).isEmpty()) {
+            Intent intent = new Intent(this, RoomActivity.class);
+            intent.putExtra("type", item.type.name());
+            startActivity(intent);
+        }
     }
 
 }

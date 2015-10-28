@@ -1,15 +1,12 @@
 package com.benouada.damine.wirelesshomeapplication;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
 
 import java.util.List;
 
@@ -20,10 +17,17 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
     private Context context;
     List<GridItem> items;
 
-    public GridItemAdapter(Context context, List<GridItem> items) {
+    public interface OnClickListener {
+        void onClick(View v, GridItem item);
+    }
+
+    OnClickListener mOnClickListener;
+
+    public GridItemAdapter(Context context, List<GridItem> items, OnClickListener mOnClickListener) {
         super(context, R.layout.grid_item, items);
         this.context = context;
         this.items = items;
+        this.mOnClickListener = mOnClickListener;
     }
 
     @Override
@@ -53,7 +57,7 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
         gridItemView = inflater.inflate(R.layout.grid_item, null);
 
 
-       final GridItem current = getItem(position);
+        final GridItem current = getItem(position);
         gridItemView.setTag(current.type);
 
         // set image based on selected text
@@ -73,20 +77,18 @@ public class GridItemAdapter extends ArrayAdapter<GridItem> {
             selectedItem = current;
         }
 
-        if (current.badge != 0){
+        if (current.badge != 0) {
             textViewBagde.setVisibility(View.VISIBLE);
         }
 
-        gridItemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!new RoomRepository().getItemsRoomByType(current.type.name()).isEmpty()) {
-                    Intent intent = new Intent(context, RoomActivity.class);
-                    intent.putExtra("type", current.type.name());
-                    context.startActivity(intent);
+        gridItemView.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnClickListener.onClick(v, current);
+                    }
                 }
-            }
-        });
+        );
 
         return gridItemView;
     }

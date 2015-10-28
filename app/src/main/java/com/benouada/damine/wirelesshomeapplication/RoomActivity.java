@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.benouada.damine.wirelesshomeapplication.data.RoomRepository;
 import com.getbase.floatingactionbutton.AddFloatingActionButton;
 
-public class RoomActivity extends AppCompatActivity {
+public class RoomActivity extends AppCompatActivity implements GridItemAdapter.OnClickListener {
 
     // --------------------------------------*******
     GridView grid;
@@ -21,8 +20,6 @@ public class RoomActivity extends AppCompatActivity {
     //    private MenuDrawer mDrawer;
     private Toolbar toolbar;
     private Toolbar supportActionBar;
-    RoomRepository roomRepository = new RoomRepository();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +70,8 @@ public class RoomActivity extends AppCompatActivity {
                     dialogInputText.setButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             *//**//**//**//**
-                             * TODO implement OK button action here
-                             *//**//**//**//*
+         * TODO implement OK button action here
+         *//**//**//**//*
                             Toast.makeText(RoomActivity.this, "" + grid.getChildAt(button.indexOf(b)).getTag(), Toast.LENGTH_LONG).show();
                         }
                     });
@@ -91,7 +88,13 @@ public class RoomActivity extends AppCompatActivity {
 
         // Instance of ImageAdapter Class
 
-        grid.setAdapter(new GridItemAdapter(this, roomRepository.getItemsRoomByType(getIntent().getStringExtra("type"))));
+        grid.setAdapter(
+                new GridItemAdapter(
+                        this,
+                        ((WirelessHomeApplication)getApplication()).roomRepository.getItemsRoomByType(getIntent().getStringExtra("type")),
+                        this
+                )
+        );
 
     }
 
@@ -122,8 +125,12 @@ public class RoomActivity extends AppCompatActivity {
      *
      * @param view
      */
-    public void fabAddClick(View view){
+    public void fabAddClick(View view) {
         Toast.makeText(this, "No actions for this button yet !!!", Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onClick(View v, GridItem item) {
+        Toast.makeText(this, "Teeeeeest !!!", Toast.LENGTH_LONG).show();
+    }
 }
