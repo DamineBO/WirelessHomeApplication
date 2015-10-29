@@ -29,7 +29,6 @@
             android:layout_alignRight="@+id/fab_menu_container"
             android:layout_alignWithParentIfMissing="false"
             android:shadowColor="#ff9f9f9f"
-            android:text="Add room  "
             android:textColor="#ff5090c1"
             android:textStyle="bold|normal|italic" />
 

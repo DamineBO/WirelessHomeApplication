@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -44,6 +45,9 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
         grid = (GridView) findViewById(R.id.all_room_container);
 
 // Menu----------------------------
+
+        TextView addThing = (TextView) findViewById(R.id.add_room);
+        addThing.setText("Add room  ");
 
         items.add(new GridItem("Bedroom", R.mipmap.r_bedroom, R.mipmap.bedroom, GridItem.ItemType.Bedroom));
         items.add(new GridItem("Kitchen", R.mipmap.r_kitchen, R.mipmap.kitchen, GridItem.ItemType.Kitchen));

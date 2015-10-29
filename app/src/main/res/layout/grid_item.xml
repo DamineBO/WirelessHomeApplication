@@ -27,10 +27,10 @@
             android:layout_alignTop="@+id/icon"
             android:layout_margin="0dp"
             android:background="@drawable/shapecount"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="0"
-            android:textColor="#FFFFFF"
+            android:textColor="#eeeeee"
             android:textStyle="bold"
             android:visibility="invisible"/>
     </RelativeLayout>

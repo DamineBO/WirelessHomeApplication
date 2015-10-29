@@ -3,6 +3,7 @@ package com.benouada.damine.wirelesshomeapplication;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -46,6 +48,9 @@ public class DeviceCategoriesActivity extends Activity implements GridItemAdapte
         grid = (GridView) findViewById(R.id.all_room_container);
 
         // Menu----------------------------
+
+        TextView addThing = (TextView) findViewById(R.id.add_room);
+        addThing.setText("Add device  ");
 
         items.add(new GridItem("Light", R.mipmap.r_light, R.mipmap.light, GridItem.ItemType.Light));
         // Instance of ImageAdapter Class
@@ -169,7 +174,11 @@ public class DeviceCategoriesActivity extends Activity implements GridItemAdapte
 
     @Override
     public void onClick(View v, GridItem item) {
-        Toast.makeText(this, "Hi I'm Light", Toast.LENGTH_LONG).show();
+        if (!((WirelessHomeApplication)getApplication()).roomRepository.getItemsRoomByType(item.type.name()).isEmpty()) {
+            Intent intent = new Intent(this, DeviceActivity.class);
+            intent.putExtra("type", item.type.name());
+            startActivity(intent);
+        }else Toast.makeText(this, "There are no devices in this Category", Toast.LENGTH_LONG).show();
 
     }
 }
