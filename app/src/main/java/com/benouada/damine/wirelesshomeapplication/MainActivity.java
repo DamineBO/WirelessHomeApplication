@@ -23,9 +23,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class MainActivity extends Activity implements GridItemAdapter.OnClickListener {
 
-    GridView grid;
+    // view
+    @Bind(R.id.all_room_container) GridView grid;
     List<GridItem> items = new ArrayList<>();
 
 
@@ -37,12 +41,11 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
         super.onCreate(state);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         //view
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-
-        // view
-        grid = (GridView) findViewById(R.id.all_room_container);
 
 // Menu----------------------------
 
@@ -160,15 +163,6 @@ public class MainActivity extends Activity implements GridItemAdapter.OnClickLis
         this.supportActionBar = supportActionBar;
     }
 
-    /*public void increment(GridItem.ItemType type) {
-        GridItem gi = null;
-        TextView tv;
-
-        while (gi.type == type) {
-            tv = (TextView) findViewById(R.id.badge);
-            tv.setText(String.valueOf(findViewById(R.id.badge)) + 1);
-        }
-    }*/
 
     /**
      * Add item to GridView that must contain all "rooms" or "devices" with :

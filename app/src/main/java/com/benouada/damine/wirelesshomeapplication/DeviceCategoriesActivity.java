@@ -87,7 +87,7 @@ public class DeviceCategoriesActivity extends Activity implements GridItemAdapte
                     dialogInputText.setTitle(String.valueOf(current.type));
 
 
-                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_input_text, null);
+                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_input_text_device, null);
                     final EditText dialogTextName = (EditText) dialogView.findViewById(R.id.dialog_text_name);
 
                     dialogInputText.setView(dialogView);

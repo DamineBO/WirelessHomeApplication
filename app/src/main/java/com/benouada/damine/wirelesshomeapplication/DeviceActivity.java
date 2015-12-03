@@ -1,5 +1,6 @@
 package com.benouada.damine.wirelesshomeapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -87,6 +88,8 @@ public class DeviceActivity extends AppCompatActivity implements GridItemAdapter
 
     @Override
     public void onClick(View v, GridItem item) {
-        Toast.makeText(this, "This must take to the device interface", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "This must take to the device interface", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, DeviceInterfaceActivity.class);
+        startActivity(intent);
     }
 }

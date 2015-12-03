@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends Activity {
 
-    private long splashDelay = 1; //en milli sec
+    private long splashDelay = 3000; //en milli sec
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
