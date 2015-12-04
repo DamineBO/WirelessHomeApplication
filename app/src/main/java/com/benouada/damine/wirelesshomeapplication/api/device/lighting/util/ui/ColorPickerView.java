@@ -1,8 +1,5 @@
 package com.benouada.damine.wirelesshomeapplication.api.device.lighting.util.ui;
 
-/**
- * Created by Damine's on 03/12/2015.
- */
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -74,7 +71,7 @@ public class ColorPickerView extends View {
         canvas.drawCircle(0.0F, 0.0F, CENTER_RADIUS, mCenterPaint);
         if (mTrackingCenter) {
             color = mCenterPaint.getColor();
-            mCenterPaint.setStyle(android.graphics.Paint.Style.STROKE);
+            mCenterPaint.setStyle(Paint.Style.STROKE);
             if (mHighlightCenter)
                 mCenterPaint.setAlpha(255);
             else
@@ -82,15 +79,15 @@ public class ColorPickerView extends View {
             canvas.drawCircle(0.0F, 0.0F,
                     CENTER_RADIUS + mCenterPaint.getStrokeWidth(),
                     mCenterPaint);
-            mCenterPaint.setStyle(android.graphics.Paint.Style.FILL);
+            mCenterPaint.setStyle(Paint.Style.FILL);
             mCenterPaint.setColor(color);
         }
     }
 
     @Override
     protected void onMeasure(int paramInt1, int paramInt2) {
-        parentWidth = View.MeasureSpec.getSize(paramInt1);
-        parentHeight = View.MeasureSpec.getSize(paramInt2);
+        parentWidth = MeasureSpec.getSize(paramInt1);
+        parentHeight = MeasureSpec.getSize(paramInt2);
         int i = Math.max(Math.min(parentWidth, parentHeight), 320);
         setMeasuredDimension(i, i);
         CENTER_X = i / 2;
@@ -102,7 +99,7 @@ public class ColorPickerView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX() - CENTER_X;
         float y = event.getY() - CENTER_Y;
-        boolean inCenter = java.lang.Math.sqrt(x * x + y * y) <= CENTER_RADIUS;
+        boolean inCenter = Math.sqrt(x * x + y * y) <= CENTER_RADIUS;
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
